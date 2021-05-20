@@ -32,6 +32,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
         </dependency>
+		<!-- habilitando retorno como xml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
     </dependencies>
 
 	<build>
