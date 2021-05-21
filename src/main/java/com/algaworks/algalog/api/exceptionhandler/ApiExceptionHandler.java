@@ -17,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +55,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private Problema getProblema(HttpStatus status, String message) {
         Problema problema = new Problema();
         problema.setStatus(status.value());
-        problema.setDataHora(LocalDateTime.now());
+        problema.setDataHora(OffsetDateTime.now());
         problema.setTitulo(message);
         return problema;
     }

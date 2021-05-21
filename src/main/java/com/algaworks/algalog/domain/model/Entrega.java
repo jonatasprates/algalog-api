@@ -13,6 +13,7 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @AllArgsConstructor
@@ -43,9 +44,9 @@ public class Entrega {
     private StatusEntrega status;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) //Campo apenas leitura
-    private LocalDateTime dataPedido;
+    private OffsetDateTime dataPedido;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) //Campo apenas leitura
-    private LocalDateTime dataFinalizacao;
+    private OffsetDateTime dataFinalizacao;
 
 }
