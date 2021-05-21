@@ -1,5 +1,6 @@
 package com.algaworks.algalog.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,8 +27,13 @@ public class Entrega {
     private BigDecimal taxa;
 
     @Enumerated(EnumType.STRING)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) //Campo apenas leitura
     private StatusEntrega status;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) //Campo apenas leitura
     private LocalDateTime dataPedido;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) //Campo apenas leitura
     private LocalDateTime dataFinalizacao;
 
 }
