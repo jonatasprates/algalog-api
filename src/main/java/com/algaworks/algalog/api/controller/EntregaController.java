@@ -5,6 +5,7 @@ import com.algaworks.algalog.api.dto.EntregaDTO;
 import com.algaworks.algalog.api.mapper.EntregaMapper;
 import com.algaworks.algalog.domain.model.Entrega;
 import com.algaworks.algalog.domain.repository.EntregaRepository;
+import com.algaworks.algalog.domain.service.FinalizacaoEntregaService;
 import com.algaworks.algalog.domain.service.SolicitacaoEntregaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,20 @@ public class EntregaController {
     @Autowired
     private EntregaMapper entregaMapper;
 
+    @Autowired
+    private FinalizacaoEntregaService finalizacaoEntregaService;
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EntregaDTO solicitar(@Valid @RequestBody Entrega entrega) {
         Entrega solicitar = solicitacaoEntregaService.solicitar(entrega);
         return entregaMapper.toDTO(solicitar);
+    }
+
+    @PutMapping("/{entregaId}/finalizacao")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finalizar(@PathVariable Long entregaId) {
+        finalizacaoEntregaService.finalizar(entregaId);
     }
 
     @GetMapping
