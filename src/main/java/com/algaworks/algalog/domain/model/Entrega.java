@@ -14,6 +14,8 @@ import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,6 +32,9 @@ public class Entrega {
     @NotNull
     @ManyToOne //muitas entregas possui um cliente
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "entrega", cascade =  CascadeType.ALL) // uma entreva possui várias ocorrencias mappedBy -> recebe o nome da dona do relacionamento inverso neste caso é a entrega, que esta na entidade entrega
+    private List<Ocorrencia> ocorrencias = new ArrayList<>();
 
     @Valid
     @NotNull
@@ -49,4 +54,14 @@ public class Entrega {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) //Campo apenas leitura
     private OffsetDateTime dataFinalizacao;
 
+    public Ocorrencia adicionarOcorrencia(String descricao) {
+        Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setDescricao(descricao);
+        ocorrencia.setDataRegistro(OffsetDateTime.now());
+        ocorrencia.setEntrega(this);
+
+        this.ocorrencias.add(ocorrencia);
+
+        return ocorrencia;
+    }
 }
